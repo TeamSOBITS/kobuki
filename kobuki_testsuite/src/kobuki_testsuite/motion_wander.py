@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #       
 # License: BSD
 #   https://raw.github.com/yujinrobot/kobuki/hydro-devel/kobuki_testsuite/LICENSE
@@ -165,7 +165,7 @@ class SafeWandering(object):
     def cliff_event_callback(self, data):
         if data.state == CliffEvent.CLIFF:
             self.ok = False
-            # print "Cliff event: %s,%s"%(str(data.sensor),str(data.state))
+            # print ("Cliff event: %s,%s"%(str(data.sensor),str(data.state)))
             if   data.sensor == CliffEvent.LEFT:
                 self.theta_goal = self.theta - 3.141592*random.uniform(0.2, 1.0)
             elif data.sensor == CliffEvent.RIGHT:

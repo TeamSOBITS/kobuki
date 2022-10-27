@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #AUTHOR: Younghun Ju <yhju@yujinrobot.com>, <yhju83@gmail.com>
 
 import roslib; roslib.load_manifest('kobuki_testsuite')
@@ -40,7 +40,7 @@ class Tester(object):
     self.command_vx = rospy.get_param('~command_vx', 0.1) # In [m/s], default is 0.1 m/s
     self.command_wz = radians(rospy.get_param('~command_wz', 5.0)) # In [deg/s], default is 5 deg/s
     # convert into [rad/s]
-    if self.debug: print self.command_vx, self.command_wz
+    if self.debug: print (self.command_vx, self.command_wz)
 
     self.init_imu = True
     self.init_angle = 0.0
@@ -50,7 +50,7 @@ class Tester(object):
     self.accumulated_angle = 0.0
 
     self.init_time = rospy.Time.now().to_time()
-    if self.debug: print 'init time: {0:2.4f}'.format(self.init_time)
+    if self.debug: print ('init time: {0:2.4f}'.format(self.init_time))
 
     self.test_angle = rospy.get_param('~test_angle', 360.0) # in [deg], default is 360 deg
     self.max_sample = rospy.get_param('~max_sample', 500) # in count, default is 500 sample
@@ -63,9 +63,9 @@ class Tester(object):
     self.pub_velocity = rospy.Publisher("cmd_vel", Twist)                 # /mobile_base/commands/velocity
     self.pub_sound = rospy.Publisher("sound", Sound)
 
-    if self.debug: print 'state:', self.state
+    if self.debug: print ('state:', self.state)
     self.state='WAIT_CONNECTION'
-    if self.debug: print 'state:', self.state
+    if self.debug: print ('state:', self.state)
     rospy.Timer(rospy.Duration.from_sec(0.02), self.timerCallback) # 50 Hz
 
   def ending_condition(self):
@@ -86,13 +86,13 @@ class Tester(object):
       if self.sub_angle.get_num_connections() > 0 and\
         self.sub_gyro.get_num_connections() > 0 and\
         self.pub_velocity.get_num_connections() > 0:
-          if self.debug: print 'connection ready.'
+          if self.debug: print ('connection ready.')
 
           self.state = 'ALIGNING'
-          if self.debug: print 'state:', self.state
+          if self.debug: print ('state:', self.state)
           return
       else:
-        if self.debug: print 'not ready yet.'
+        if self.debug: print ('not ready yet.')
         return
 
     if self.state == "ALIGNING":
@@ -104,7 +104,7 @@ class Tester(object):
         cmd_vel.angular.z = -0.33*scan_angle/abs(scan_angle)
         self.pub_velocity.publish(cmd_vel)
         self.init_time = rospy.Time.now().to_time()
-        if self.debug: print 'state:', self.state, ':', scan_angle, '-->', cmd_vel.angular.z
+        if self.debug: print ('state:', self.state, ':', scan_angle, '-->', cmd_vel.angular.z)
         return
       else:
         cmd_vel = Twist()
@@ -113,14 +113,14 @@ class Tester(object):
         self.pub_velocity.publish(cmd_vel)
 
         if self.elapsed_time > 5.0:
-          if self.debug: print 'alining ready.'
+          if self.debug: print ('alining ready.')
 
           self.pub_sound.publish(Sound(value=Sound.RECHARGE))
           self.state = 'WAIT_TRIGGER'
-          if self.debug: print 'state:', self.state
+          if self.debug: print ('state:', self.state)
           return
         else:
-          if self.debug: print 'state:', self.state
+          if self.debug: print ('state:', self.state)
           return
 
     if self.state == 'WAIT_TRIGGER':
@@ -129,7 +129,7 @@ class Tester(object):
           self.state = 'CALC_ANGLE_PRERUN'
           self.reset_angle = True
           self.angle_count = 0
-          if self.debug: print 'state:', self.state
+          if self.debug: print ('state:', self.state)
           return
       else:
           return
@@ -137,13 +137,13 @@ class Tester(object):
     if self.state == 'CALC_ANGLE_PRERUN':
       if self.angle_count >= self.max_sample:
         self.angle_prerun = self.angle_avg
-        if self.debug: print 'angle prerun: ', self.angle_prerun
+        if self.debug: print ('angle prerun: ', self.angle_prerun)
 
         self.pub_sound.publish(Sound(value=Sound.RECHARGE))
 
         self.state = 'RUNNING'
         self.init_time = rospy.Time.now().to_time()
-        if self.debug: print 'state:', self.state
+        if self.debug: print ('state:', self.state)
 
         self.init_imu = True
         self.init_angle = 0.0
@@ -154,7 +154,7 @@ class Tester(object):
 
         return
       else:
-        if self.debug: print 'state:', self.state, ':', self.angle_count, self.scan_angle, self.angle_sum, self.angle_avg
+        if self.debug: print ('state:', self.state, ':', self.angle_count, self.scan_angle, self.angle_sum, self.angle_avg)
         return
 
     if self.state == 'RUNNING':
@@ -166,14 +166,14 @@ class Tester(object):
         self.pub_velocity.publish(cmd_vel)
         self.running_time = self.elapsed_time
         self.init_time = rospy.Time.now().to_time()
-        if self.debug: print 'state:', self.state
+        if self.debug: print ('state:', self.state)
         return
       else:
         cmd_vel = Twist()
         cmd_vel.linear.x = self.command_vx  # In [m/s]
         cmd_vel.angular.z = self.command_wz # In [rad/s]
         self.pub_velocity.publish(cmd_vel)
-        if self.debug: print 'state:', self.state, ':', degrees(self.accumulated_angle), self.test_angle
+        if self.debug: print ('state:', self.state, ':', degrees(self.accumulated_angle), self.test_angle)
         return
 
     if self.state == 'STOP':
@@ -181,10 +181,10 @@ class Tester(object):
         self.reset_angle = True
         self.angle_count = 0
         self.state = 'CALC_ANGLE_POSTRUN'
-        if self.debug: print 'state:', self.state
+        if self.debug: print ('state:', self.state)
         return
       else:
-        if self.debug: print 'state:', self.state
+        if self.debug: print ('state:', self.state)
         return
 
     if self.state == 'CALC_ANGLE_POSTRUN':
@@ -210,12 +210,12 @@ class Tester(object):
 
         self.state = 'DONE'
         self.done = True
-        if self.debug: print 'state:', self.state
+        if self.debug: print ('state:', self.state)
         rospy.signal_shutdown('jobs_done')
         time.sleep(5.0)
         return
       else:
-        if self.debug: print 'state:', self.state, ':', self.angle_count, self.scan_angle, self.angle_sum, self.angle_avg
+        if self.debug: print ('state:', self.state, ':', self.angle_count, self.scan_angle, self.angle_sum, self.angle_avg)
         return
 
   def imuCallback(self,data):
@@ -239,7 +239,7 @@ class Tester(object):
     self.scan_angle = data.scan_angle
 
     if self.reset_angle:
-      if self.debug: print 'Resetted'
+      if self.debug: print ('Resetted')
       self.angle_count = 0
       self.angle_sum = 0
       self.scan_angle = 0
@@ -255,18 +255,18 @@ class Tester(object):
   def buttonCallback(self,data):
     if rospy.is_shutdown(): return
     if data.button == ButtonEvent.Button0 and data.state == ButtonEvent.RELEASED:
-      #if self.debug: print 'button0 pressed'
+      #if self.debug: print ('button0 pressed')
       self.triggered=True
       return
     #if data.button == ButtonEvent.Button1 and data.state == ButtonEvent.RELEASED:
-    #  if self.debug: print 'button1 pressed'; return
+    #  if self.debug: print ('button1 pressed'); return
     #if data.button == ButtonEvent.Button2 and data.state == ButtonEvent.RELEASED:
-    #  if self.debug: print 'button2 pressed'; return
+    #  if self.debug: print ('button2 pressed'); return
 
 if __name__ == '__main__':
-  print
-  print "It test gyro on kobuki and print gyro drift errors."
-  print
+  print ("")
+  print ("It test gyro on kobuki and print gyro drift errors.")
+  print ("")
   try:
     instance = Tester()
     rospy.spin()

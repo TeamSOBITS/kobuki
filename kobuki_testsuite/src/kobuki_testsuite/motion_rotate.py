@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #       
 # License: BSD
 #   https://raw.github.com/yujinrobot/kobuki/hydro-devel/kobuki_testsuite/LICENSE
@@ -81,7 +81,7 @@ class Rotate():
 
                 while math.fabs(twist.angular.z) <= self._yaw_rate:
                     twist.angular.z = twist.angular.z + update
-                    #print "Command velocity: %s"%twist.angular.z
+                    #print ("Command velocity: %s"%twist.angular.z)
                     self.cmd_vel_publisher.publish(twist)
                     rospy.sleep(0.04)
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # Software License Agreement (BSD License)
 #
@@ -203,7 +203,7 @@ class Controller(object):
         m = self.keyBindings[key][2]
         if type(f) is types.InstanceType or type(f) is types.MethodType or type(f) is types.FunctionType : f(v)
         else:
-          print type(f)
+          print (type(f))
         self.message = str(m)
       else:
         self.message = str(self.keyBindings[key])
@@ -278,18 +278,18 @@ class Controller(object):
 
   def printFront(self): 
     # statement
-    print ""
-    print " Dock Drive Controller"
-    print "----------------------"
-    print "1: do_dock"
-    print "2: run"
-    print "3: stop" 
-    print "4: cancel_dock"
-    print ""
-    print "q: quit"
-    print ""
-    #print "  3.3V  5.0V 12V5A 12V1A |   Led #1   Led #2 |  DO_0  DO_1  DO_2  DO_3"
-    #print " [ On] [Off] [ On] [Off] | [Orange] [Orange] | [ On] [Off] [Off] [ On]"
+    print ("")
+    print (" Dock Drive Controller")
+    print ("----------------------")
+    print ("1: do_dock")
+    print ("2: run")
+    print ("3: stop" )
+    print ("4: cancel_dock")
+    print ("")
+    print ("q: quit")
+    print ("")
+    #print ("  3.3V  5.0V 12V5A 12V1A |   Led #1   Led #2 |  DO_0  DO_1  DO_2  DO_3")
+    #print (" [ On] [Off] [ On] [Off] | [Orange] [Orange] | [ On] [Off] [Off] [ On]")
 
   def printStatus(self):
     sys.stdout.write('                                                                                                               \r')

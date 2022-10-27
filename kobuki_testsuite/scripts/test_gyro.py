@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # Software License Agreement (BSD License)
 #
@@ -60,4 +60,4 @@ def ImuCallback(data):
 rospy.init_node("test_gyro")
 rospy.Subscriber("/mobile_base/sensors/imu_data", Imu, ImuCallback)
 rospy.spin()
-print '' # for clean output
+print ('') # for clean output

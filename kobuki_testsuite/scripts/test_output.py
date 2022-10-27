@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # Software License Agreement (BSD License)
 #
@@ -169,28 +169,28 @@ while not pub[1].get_num_connections():
 pub[1].publish(leds[1])
 
 # statement
-print ""
-print "Control Every Output of Kobuki"
-print "------------------------------"
-print "1: Toggle the state of 3.3V"
-print "2: Toggle the state of 5V"
-print "3: Toggle the state of 12V5A(arm)"
-print "4: Toggle the state of 12V1A(kinect)"
-print ""
-print "5: Control Led #1"
-print "6: Control Led #2"
-print ""
-print "7~0: Toggle the state of DigitalOut_0~3"
-print ""
-print "Play Sounds"
-print "-----------"
-print "a: On   s: Off   d: Recharge   f: Button   z: Error   x: CleaningStart   c: CleaningEnd"
-print ""
-print "q: Quit"
-print ""
-print ""
-print "  3.3V  5.0V 12V5A 12V1A |   Led #1   Led #2 |  DO_0  DO_1  DO_2  DO_3"
-#print " [ On] [Off] [ On] [Off] | [Orange] [Orange] | [ On] [Off] [Off] [ On]"
+print ("")
+print ("Control Every Output of Kobuki")
+print ("------------------------------")
+print ("1: Toggle the state of 3.3V")
+print ("2: Toggle the state of 5V")
+print ("3: Toggle the state of 12V5A(arm)")
+print ("4: Toggle the state of 12V1A(kinect)")
+print ("")
+print ("5: Control Led #1")
+print ("6: Control Led #2")
+print ("")
+print ("7~0: Toggle the state of DigitalOut_0~3")
+print ("")
+print ("Play Sounds")
+print ("-----------")
+print ("a: On   s: Off   d: Recharge   f: Button   z: Error   x: CleaningStart   c: CleaningEnd")
+print ("")
+print ("q: Quit")
+print ("")
+print ("")
+print ("  3.3V  5.0V 12V5A 12V1A |   Led #1   Led #2 |  DO_0  DO_1  DO_2  DO_3")
+#print (" [ On] [Off] [ On] [Off] | [Orange] [Orange] | [ On] [Off] [Off] [ On]")
 
 while not rospy.is_shutdown():
     printStatus(external_power.values, digital_output.values, leds)

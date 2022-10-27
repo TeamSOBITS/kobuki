@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # Software License Agreement (BSD License)
 #
@@ -57,7 +57,7 @@ msg = Sound()
 while not rospy.is_shutdown():
     for sound, text in zip(sounds, texts):
         msg.value = sound
-        print text 
+        print (text) 
         pub.publish(msg)
         rate.sleep()
     break

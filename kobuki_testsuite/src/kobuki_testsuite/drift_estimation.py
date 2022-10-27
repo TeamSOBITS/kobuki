@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #
 # License: BSD
 #   https://raw.github.com/yujinrobot/kobuki/hydro-devel/kobuki_testsuite/LICENSE
@@ -48,7 +48,7 @@ class ScanToAngle(object):
         self.max_angle = max_angle
 
     def shutdown(self):
-        print("Killing off scan angle publisher")
+        print ("Killing off scan angle publisher")
         if not rospy.is_shutdown():
             with self.lock:
                 self.scan_subscriber.unregister()
@@ -79,7 +79,7 @@ class ScanToAngle(object):
             denominator = num*sum_xx-sum_x*sum_x
             if denominator != 0:
                 angle = math.atan2((-sum_x*sum_y+num*sum_xy)/(denominator), 1)
-                # print("Scan Angle: %s"%str(angle))
+                # print ("Scan Angle: %s"%str(angle))
                 relay = ScanAngle()
                 relay.header = msg.header
                 relay.scan_angle = angle
@@ -129,7 +129,7 @@ class DriftEstimation(object):
         while self._running:
             self.rate.sleep()
         if not rospy.is_shutdown():
-            print("Shutting down drift estimation")
+            print ("Shutting down drift estimation")
             self._gyro_scan_angle_publisher.unregister()
             self._gyro_scan_angle_publisher = None
             self._laser_scan_angle_subscriber.unregister()
@@ -161,8 +161,8 @@ class DriftEstimation(object):
         with self.lock:
             if not self._initial_gyro_offset:
                 self._initial_gyro_offset = self._gyro_angle - self._scan_angle
-                print("Kobuki Testsuite: initial centre [%s]" % self._centred_gyro_angle)
-                print("Kobuki Testsuite: initial offset [%s]" % self._initial_gyro_offset)
+                print ("Kobuki Testsuite: initial centre [%s]" % self._centred_gyro_angle)
+                print ("Kobuki Testsuite: initial offset [%s]" % self._initial_gyro_offset)
         last_gyro_time = rospy.get_rostime()
         last_scan_time = rospy.get_rostime()
         yaw_rate_cmd = self._abs_yaw_rate
@@ -237,7 +237,7 @@ class DriftEstimation(object):
             rospy.sleep(0.05)
             with self.lock:
                 angle = self._scan_angle
-        print("end of align")
+        print ("end of align")
 
     ##########################################################################
     # Ros Callbacks

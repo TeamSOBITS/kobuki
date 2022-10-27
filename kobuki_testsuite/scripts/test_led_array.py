@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # Software License Agreement (BSD License)
 #
@@ -61,7 +61,7 @@ while not rospy.is_shutdown():
             led.value = Led.BLACK
         elif led.value == Led.BLACK:
             led.value = Led.GREEN
-    print "[" + colours[leds[0].value] + "," + colours[leds[1].value] + "]" 
+    print ("[" + colours[leds[0].value] + "," + colours[leds[1].value] + "]")
     pub[0].publish(leds[0])
     pub[1].publish(leds[1])
     rate.sleep()

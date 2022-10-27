@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #
 # License: BSD
 #   https://raw.github.com/yujinrobot/kobuki/hydro-devel/kobuki_testsuite/LICENSE
@@ -81,7 +81,7 @@ class TravelForward(object):
                 current_distance_sq = (self._current_pose.position.x - self._starting_pose.position.x)*(self._current_pose.position.x - self._starting_pose.position.x) + \
                                    (self._current_pose.position.y - self._starting_pose.position.y)*(self._current_pose.position.y - self._starting_pose.position.y)
                 #current_distance_sq += 0.01 # uncomment this and comment above for debugging
-                print("Distance %s" % math.sqrt(current_distance_sq))
+                print ("Distance %s" % math.sqrt(current_distance_sq))
                 if self.speed > 0:
                     if self._current_speed < self.speed:
                         self._current_speed += 0.01

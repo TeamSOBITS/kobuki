@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # Software License Agreement (BSD License)
 #
@@ -121,17 +121,17 @@ rospy.Subscriber("/mobile_base/events/wheel_drop",WheelDropEvent,WheelDropEventC
 rospy.Subscriber("/mobile_base/events/cliff",CliffEvent,CliffEventCallback)
 rospy.Subscriber("/mobile_base/events/power_system",PowerSystemEvent,PowerEventCallback)
 rospy.Subscriber("/mobile_base/events/digital_input",DigitalInputEvent,InputEventCallback)
-print ""
-print "Try kobuki's hardware components; the following events should be reported:"
-print "  - buttons"
-print "  - bumpers"
-print "  - wheel drops"
-print "  - cliffs"
-print "  - plug/unplug adapter"
-print "  - dock/undock on base"
-print "  - charge completed"
-print "  - battery low/critical"
-print "  - digital input changes"
-print ""
+print ("")
+print ("Try kobuki's hardware components; the following events should be reported:")
+print ("  - buttons")
+print ("  - bumpers")
+print ("  - wheel drops")
+print ("  - cliffs")
+print ("  - plug/unplug adapter")
+print ("  - dock/undock on base")
+print ("  - charge completed")
+print ("  - battery low/critical")
+print ("  - digital input changes")
+print ("")
 rospy.spin()
     

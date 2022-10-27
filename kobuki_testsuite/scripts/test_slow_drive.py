@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # Software License Agreement (BSD License)
 #
@@ -96,7 +96,7 @@ test_slow_drive_obj = Test_slow_drive()
 
 while not rospy.is_shutdown():
     rospy.spin()
-print ''
-print test_slow_drive_obj.int_err
-print test_slow_drive_obj.avg_err
-print '' # for clean output
+print ('')
+print (test_slow_drive_obj.int_err)
+print (test_slow_drive_obj.avg_err)
+print ('') # for clean output

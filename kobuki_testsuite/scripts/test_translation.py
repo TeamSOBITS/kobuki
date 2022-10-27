@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # Software License Agreement (BSD License)
 #
@@ -119,7 +119,7 @@ class Test_Translation:
 				rospy.loginfo("bumper event")
 				self.twist.linear.x = 0
 				self.cmd_vel_pub.publish(self.twist)
-				print('---- bumper event ----')
+				print ('---- bumper event ----')
 			self.state = 0
 
 		if self.odom > 0:
@@ -139,7 +139,7 @@ class Test_Translation:
 		rospy.loginfo("%s bumper is %s", bumper, state)
 
 	def ShowImuInfo(self):
-		print "imu : %.6f"%self.imu
+		print ("imu : %.6f"%self.imu)
 
 
 def test_trans_main():

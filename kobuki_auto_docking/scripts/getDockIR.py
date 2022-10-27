@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #########AUTHOR: Younghun Ju <yhju@yujinrobot.comm>, <yhju83@gmail.com>
 
 import roslib; roslib.load_manifest('kobuki_node')
@@ -71,13 +71,13 @@ class Converter(object):
     ostr = head + delimiter + ostr_top + delimiter + ostr_bot + delimiter + ostr_bin# + "\n" + ostr_dec
       #verN: average
       #verN: 
-    print ostr
+    print (ostr)
 
 if __name__ == '__main__':
   try:
     instance = Converter()
-    print 
-    print "It converts dock_ir data to human friendly format."
-    print
+    print ("")
+    print ("It converts dock_ir data to human friendly format.")
+    print ("")
     rospy.spin()
   except rospy.ROSInterruptException: pass

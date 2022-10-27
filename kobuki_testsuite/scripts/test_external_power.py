@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # Software License Agreement (BSD License)
 #
@@ -94,21 +94,21 @@ rate = rospy.Rate(10)
 digital_output = DigitalOutput()
 digital_output.values = [ True, True, True, True ]
 digital_output.mask = [ True, True, True, True ]
-print ""
-#print "If you want to control the timing of publish, uses -p option."
-#print ""
-print "Control External Power"
-print "----------------------"
-print "1: Toggle the state of 3.3V"
-print "2: Toggle the state of 5V"
-print "3: Toggle the state of 12V5A(arm)"
-print "4: Toggle the state of 12V1A(kinect)"
-print ""
-#print "p: publish power on/off status"
-print "q: quit"
-print ""
-print "  3.3V  5.0V 12V5A 12V1A"
-#print " [ On] [Off] [ On] [Off]"
+print ("")
+#print ("If you want to control the timing of publish, uses -p option.")
+#print ("")
+print ("Control External Power")
+print ("----------------------")
+print ("1: Toggle the state of 3.3V")
+print ("2: Toggle the state of 5V")
+print ("3: Toggle the state of 12V5A(arm)")
+print ("4: Toggle the state of 12V1A(kinect)")
+print ("")
+#print ("p: publish power on/off status")
+print ("q: quit")
+print ("")
+print ("  3.3V  5.0V 12V5A 12V1A")
+#print (" [ On] [Off] [ On] [Off]")
 
 # reset current state of external powers
 while pub.get_num_connections():
@@ -124,9 +124,9 @@ while not rospy.is_shutdown():
     elif key in keyBindings.keys():
         digital_output.values[keyBindings[key]] ^= True
         printStatus(digital_output.values)
-        #print digital_output.values    
+        #print (digital_output.values)
 #    elif key == '\n' or key == 'p' or key == 'P':
         pub.publish(digital_output)
-        #print ' - published [', datetime.fromtimestamp(time.time()).strftime("%Y-%m-%d %p %I:%M:%S"), ']'
+        #print (' - published [', datetime.fromtimestamp(time.time()).strftime("%Y-%m-%d %p %I:%M:%S"), ']')
         #rate.sleep()
 
