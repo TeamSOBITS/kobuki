@@ -29,7 +29,10 @@ def wrap_angle(angle):
     elif angle < 0.0:
         return math.fmod(angle-math.pi,2.0*math.pi)+math.pi
     else:
-        return math.fmod(angle+math.pi,2.0*math.pi)-math.pi;
+        return math.fmod(angle+math.pi,2.0*math.pi)-math.pi
+
+def cmp(a, b):
+    return (a > b) - (a < b)
 
 ##############################################################################
 # Classes

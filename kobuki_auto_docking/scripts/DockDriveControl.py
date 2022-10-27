@@ -40,7 +40,7 @@ import sys, select, termios, tty, os
 import time
 from datetime import datetime
 import types
-import commands
+import subprocess
 
 from std_msgs.msg import String, Empty
 from geometry_msgs.msg import Twist
@@ -258,9 +258,9 @@ class Controller(object):
       self.dock_ir = data
 
   def batteryCallback(self, event):
-    rem = float(commands.getoutput("grep \"^remaining capacity\" /proc/acpi/battery/" + self.bat_name + "/state | awk '{ print $3 }'"))
-    full = float(commands.getoutput("grep \"^last full capacity\" /proc/acpi/battery/" + self.bat_name + "/info | awk '{ print $4 }'"))
-    self.state = commands.getoutput("grep \"^charging state\" /proc/acpi/battery/" + self.bat_name + "/state | awk '{ print $3 }'")
+    rem = float(subprocess.getoutput("grep \"^remaining capacity\" /proc/acpi/battery/" + self.bat_name + "/state | awk '{ print $3 }'"))
+    full = float(subprocess.getoutput("grep \"^last full capacity\" /proc/acpi/battery/" + self.bat_name + "/info | awk '{ print $4 }'"))
+    self.state = subprocess.getoutput("grep \"^charging state\" /proc/acpi/battery/" + self.bat_name + "/state | awk '{ print $3 }'")
     self.percentage = float((rem/full) * 100.)
 
   def stateCallback(self, event):
