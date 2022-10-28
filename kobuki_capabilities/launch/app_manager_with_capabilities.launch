@@ -52,7 +52,7 @@
     <arg name="interactions"                              value="$(arg interactions)"/>
 
     <arg name="zeroconf"                                  value="$(arg zeroconf)"/>
-    <arg name="zeroconf_name"                             value="$(arg zeroconf_name)"/>
+    <!-- <arg name="zeroconf_name"                             value="$(arg zeroconf_name)"/> -->
     <arg name="zeroconf_port"                             value="$(arg zeroconf_port)"/>
   </include>
 </launch>

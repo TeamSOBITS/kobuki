@@ -32,7 +32,7 @@ class Converter(object):
     self.stack.append(array)
     while len(self.stack) > self.window:
       del self.stack[0]
-    if not self.oneline: print 
+    if not self.oneline: print ("")
     head = "window: {0:d}/{1:d} ".format(len(self.stack),self.window)
     head += "charger: {0:d} ".format(self.charger)
     head += "[ON] " if self.charger else "[  ] "

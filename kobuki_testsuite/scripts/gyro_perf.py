@@ -60,8 +60,8 @@ class Tester(object):
     self.sub_angle = rospy.Subscriber("angle_abs", ScanAngle, self.angleCallback) # Absolute angle from laser scanner
     self.sub_gyro = rospy.Subscriber("imu_data", Imu, self.imuCallback)   # /mobile_base/sensors/imu_data
     self.sub_button = rospy.Subscriber("button", ButtonEvent, self.buttonCallback)
-    self.pub_velocity = rospy.Publisher("cmd_vel", Twist)                 # /mobile_base/commands/velocity
-    self.pub_sound = rospy.Publisher("sound", Sound)
+    self.pub_velocity = rospy.Publisher("cmd_vel", Twist, queue_size=10)                 # /mobile_base/commands/velocity
+    self.pub_sound = rospy.Publisher("sound", Sound, queue_size=10)
 
     if self.debug: print ('state:', self.state)
     self.state='WAIT_CONNECTION'
