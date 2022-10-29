@@ -43,10 +43,10 @@ from kobuki_msgs.msg import SensorState
 
 
 def SensorStateCallback(data):
-	sys.stdout.write("\r\x1b[KAnalog input: [%d, %d, %d, %d]"     \
-					%(data.analog_input[0], data.analog_input[1], \
-					  data.analog_input[2], data.analog_input[3]))
-	sys.stdout.flush()
+    sys.stdout.write("\r\x1b[KAnalog input: [%d, %d, %d, %d]"     \
+                    %(data.analog_input[0], data.analog_input[1], \
+                      data.analog_input[2], data.analog_input[3]))
+    sys.stdout.flush()
 
 rospy.init_node("test_analog_input")
 rospy.Subscriber("/mobile_base/sensors/core", SensorState, SensorStateCallback)

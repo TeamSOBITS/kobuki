@@ -43,8 +43,8 @@ from kobuki_msgs.msg import SensorState
 
 
 def SensorStateCallback(data):
-	sys.stdout.write("\r\x1b[KBattery voltage: " + str(data.battery/10.0))
-	sys.stdout.flush()
+    sys.stdout.write("\r\x1b[KBattery voltage: " + str(data.battery/10.0))
+    sys.stdout.flush()
 
 rospy.init_node("test_battery_level")
 rospy.Subscriber("/mobile_base/sensors/core", SensorState, SensorStateCallback)
