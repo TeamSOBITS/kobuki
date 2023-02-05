@@ -195,9 +195,9 @@ void KobukiRos::subscribeSoundCommand(const kobuki_msgs::SoundConstPtr msg)
 void KobukiRos::subscribeResetOdometry(const std_msgs::EmptyConstPtr /* msg */)
 {
   ROS_INFO_STREAM("Kobuki : Resetting the odometry. [" << name << "].");
-  joint_states.position[0] = 0.0; // wheel_left
+  joint_states.position[0] = 0.0; // wheel_l
   joint_states.velocity[0] = 0.0;
-  joint_states.position[1] = 0.0; // wheel_right
+  joint_states.position[1] = 0.0; // wheel_r
   joint_states.velocity[1] = 0.0;
   odometry.resetOdometry();
   kobuki.resetOdometry();
