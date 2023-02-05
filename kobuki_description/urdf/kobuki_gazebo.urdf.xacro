@@ -2,7 +2,7 @@
 
 <robot name="kobuki_sim" xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:macro name="kobuki_sim">
-    <gazebo reference="wheel_left_link">
+    <gazebo reference="wheel_l_link">
       <mu1>1.0</mu1>
       <mu2>1.0</mu2>
       <kp>1000000.0</kp>
@@ -11,7 +11,7 @@
       <maxVel>1.0</maxVel>
     </gazebo>
 
-    <gazebo reference="wheel_right_link">
+    <gazebo reference="wheel_r_link">
       <mu1>1.0</mu1>
       <mu2>1.0</mu2>
       <kp>1000000.0</kp>
@@ -172,8 +172,8 @@
     <gazebo>
       <plugin name="kobuki_controller" filename="libgazebo_ros_kobuki.so">
         <publish_tf>1</publish_tf>
-        <left_wheel_joint_name>wheel_left_joint</left_wheel_joint_name>
-        <right_wheel_joint_name>wheel_right_joint</right_wheel_joint_name>
+        <left_wheel_joint_name>wheel_l_joint</left_wheel_joint_name>
+        <right_wheel_joint_name>wheel_r_joint</right_wheel_joint_name>
         <wheel_separation>.230</wheel_separation>
         <wheel_diameter>0.070</wheel_diameter>
         <torque>1.0</torque>

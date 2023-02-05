@@ -151,10 +151,10 @@ bool KobukiRos::init(ros::NodeHandle& nh, ros::NodeHandle& nh_pub)
   /*********************
    ** Joint States
    **********************/
-  std::string robot_description, wheel_left_joint_name, wheel_right_joint_name;
+  std::string robot_description, wheel_l_joint_name, wheel_r_joint_name;
 
-  nh.param("wheel_left_joint_name", wheel_left_joint_name, std::string("wheel_left_joint"));
-  nh.param("wheel_right_joint_name", wheel_right_joint_name, std::string("wheel_right_joint"));
+  nh.param("wheel_l_joint_name", wheel_l_joint_name, std::string("wheel_l_joint"));
+  nh.param("wheel_r_joint_name", wheel_r_joint_name, std::string("wheel_r_joint"));
 
   // minimalistic check: are joint names present on robot description file?
   if (!nh_pub.getParam("robot_description", robot_description))
@@ -163,16 +163,16 @@ bool KobukiRos::init(ros::NodeHandle& nh, ros::NodeHandle& nh_pub)
   }
   else
   {
-    if (robot_description.find(wheel_left_joint_name) == std::string::npos) {
-      ROS_WARN("Kobuki : joint name %s not found on robot description", wheel_left_joint_name.c_str());
+    if (robot_description.find(wheel_l_joint_name) == std::string::npos) {
+      ROS_WARN("Kobuki : joint name %s not found on robot description", wheel_l_joint_name.c_str());
     }
 
-    if (robot_description.find(wheel_right_joint_name) == std::string::npos) {
-      ROS_WARN("Kobuki : joint name %s not found on robot description", wheel_right_joint_name.c_str());
+    if (robot_description.find(wheel_r_joint_name) == std::string::npos) {
+      ROS_WARN("Kobuki : joint name %s not found on robot description", wheel_r_joint_name.c_str());
     }
   }
-  joint_states.name.push_back(wheel_left_joint_name);
-  joint_states.name.push_back(wheel_right_joint_name);
+  joint_states.name.push_back(wheel_l_joint_name);
+  joint_states.name.push_back(wheel_r_joint_name);
   joint_states.position.resize(2,0.0);
   joint_states.velocity.resize(2,0.0);
   joint_states.effort.resize(2,0.0);

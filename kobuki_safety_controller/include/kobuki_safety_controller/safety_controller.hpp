@@ -79,8 +79,8 @@ public:
     Controller(),
     nh_(nh),
     name_(name),
-    wheel_left_dropped_(false),
-    wheel_right_dropped_(false),
+    wheel_l_dropped_(false),
+    wheel_r_dropped_(false),
     bumper_left_pressed_(false),
     bumper_center_pressed_(false),
     bumper_right_pressed_(false),
@@ -123,7 +123,7 @@ private:
   ros::Subscriber bumper_event_subscriber_, cliff_event_subscriber_, wheel_event_subscriber_;
   ros::Subscriber reset_safety_states_subscriber_;
   ros::Publisher controller_state_publisher_, velocity_command_publisher_;
-  bool wheel_left_dropped_, wheel_right_dropped_;
+  bool wheel_l_dropped_, wheel_r_dropped_;
   bool bumper_left_pressed_, bumper_center_pressed_, bumper_right_pressed_;
   bool cliff_left_detected_, cliff_center_detected_, cliff_right_detected_;
   ros::Duration time_to_extend_bump_cliff_events_;
@@ -255,12 +255,12 @@ void SafetyController::wheelEventCB(const kobuki_msgs::WheelDropEventConstPtr ms
     if (msg->wheel == kobuki_msgs::WheelDropEvent::LEFT)
     {
       ROS_DEBUG_STREAM("Left wheel dropped. [" << name_ << "]");
-      wheel_left_dropped_ = true;
+      wheel_l_dropped_ = true;
     }
     else // kobuki_msgs::WheelDropEvent::RIGHT
     {
       ROS_DEBUG_STREAM("Right wheel dropped. [" << name_ << "]");
-      wheel_right_dropped_ = true;
+      wheel_r_dropped_ = true;
     }
   }
   else // kobuki_msgs::WheelDropEvent::RAISED
@@ -269,14 +269,14 @@ void SafetyController::wheelEventCB(const kobuki_msgs::WheelDropEventConstPtr ms
     if (msg->wheel == kobuki_msgs::WheelDropEvent::LEFT)
     {
       ROS_DEBUG_STREAM("Left wheel raised. [" << name_ << "]");
-      wheel_left_dropped_ = false;
+      wheel_l_dropped_ = false;
     }
     else // kobuki_msgs::WheelDropEvent::RIGHT
     {
       ROS_DEBUG_STREAM("Right wheel raised. [" << name_ << "]");
-      wheel_right_dropped_ = false;
+      wheel_r_dropped_ = false;
     }
-    if (!wheel_left_dropped_ && !wheel_right_dropped_)
+    if (!wheel_l_dropped_ && !wheel_r_dropped_)
     {
       ROS_DEBUG_STREAM("Both wheels raised. Resuming normal operation. [" << name_ << "]");
     }
@@ -285,8 +285,8 @@ void SafetyController::wheelEventCB(const kobuki_msgs::WheelDropEventConstPtr ms
 
 void SafetyController::resetSafetyStatesCB(const std_msgs::EmptyConstPtr msg)
 {
-  wheel_left_dropped_    = false;
-  wheel_right_dropped_   = false;
+  wheel_l_dropped_    = false;
+  wheel_r_dropped_   = false;
   bumper_left_pressed_   = false;
   bumper_center_pressed_ = false;
   bumper_right_pressed_  = false;
@@ -300,7 +300,7 @@ void SafetyController::spin()
 {
   if (this->getState())
   {
-    if (wheel_left_dropped_ || wheel_right_dropped_)
+    if (wheel_l_dropped_ || wheel_r_dropped_)
     {
       msg_.reset(new geometry_msgs::Twist());
       msg_->linear.x = 0.0;
